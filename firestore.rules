@@ -1,0 +1,260 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn() && request.auth.token.get('admin', false) == true;
+    }
+
+    function isTeacher() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/profiles/$(request.auth.uid))
+        && get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data.role == "teacher";
+    }
+
+    function isOwnTeacher(teacherId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/teachers/$(teacherId))
+        && get(/databases/$(database)/documents/teachers/$(teacherId)).data.profile_id == request.auth.uid;
+    }
+
+    function isValidProfile(data, allowedRoles) {
+      return data.keys().hasOnly([
+          "id", "email", "full_name", "role", "onboarded", "created_at",
+          "gender", "age", "track", "target_level", "current_level", "exam_date",
+          "study_minutes", "weak_skills"
+        ])
+        && data.keys().hasAll(["id", "email", "full_name", "role", "onboarded", "created_at"])
+        && data.role in allowedRoles
+        && data.id is string
+        && data.email is string
+        && data.email.size() <= 320
+        && data.full_name is string
+        && data.full_name.size() <= 120
+        && data.onboarded is bool
+        && data.created_at is string
+        && data.created_at.size() <= 40;
+    }
+
+    function isValidStudentPreferences(data) {
+      return data.gender in ["female", "male", "prefer_not_to_say"]
+        && data.age is int
+        && data.age >= 1
+        && data.age <= 120
+        && data.track in ["ielts", "cefr"]
+        && data.target_level is string
+        && (data.track == "ielts"
+          ? data.target_level in ["5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0"]
+          : data.target_level in ["A1", "A2", "B1", "B2", "C1", "C2"])
+        && data.current_level in ["A1", "A2", "B1", "B2", "C1", "C2"]
+        && data.exam_date is string
+        && data.exam_date.matches("^\\d{4}-\\d{2}-\\d{2}$")
+        && data.study_minutes in [30, 60, 90, 120]
+        && data.weak_skills is list
+        && data.weak_skills.size() >= 1
+        && data.weak_skills.size() <= 4
+        && data.weak_skills.toSet().size() == data.weak_skills.size()
+        && data.weak_skills.toSet().hasOnly(["Listening", "Reading", "Writing", "Speaking"]);
+    }
+
+    match /profiles/{userId} {
+      allow create: if isAdmin()
+        ? isValidProfile(request.resource.data, ["student", "teacher", "admin"])
+        : signedIn()
+          && request.auth.uid == userId
+          && isValidProfile(request.resource.data, ["student"])
+          && request.resource.data.id == userId
+          && request.resource.data.email == request.auth.token.get("email", "")
+          && request.resource.data.onboarded == false;
+
+      allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+
+      allow update: if isAdmin()
+        || (signedIn()
+          && request.auth.uid == userId
+          && resource.data.role == "student"
+          && request.resource.data.role == resource.data.role
+          && request.resource.data.id == resource.data.id
+          && request.resource.data.email == resource.data.email
+          && request.resource.data.full_name == resource.data.full_name
+          && request.resource.data.created_at == resource.data.created_at
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            "gender", "age", "track", "target_level", "current_level", "exam_date",
+            "study_minutes", "weak_skills", "onboarded"
+          ])
+          && request.resource.data.onboarded == true
+          && isValidStudentPreferences(request.resource.data));
+
+      allow delete: if isAdmin();
+    }
+
+    match /teachers/{teacherId} {
+      allow read: if resource.data.is_published == true || isAdmin() || isOwnTeacher(teacherId);
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /lessons/{lessonId} {
+      allow read: if resource.data.is_published == true
+        || isAdmin()
+        || (isTeacher() && resource.data.teacher_id == request.auth.uid);
+      allow create: if isAdmin()
+        || (isTeacher()
+          && request.resource.data.teacher_id == request.auth.uid
+          && request.resource.data.track in ["ielts", "cefr"]
+          && request.resource.data.is_published is bool
+          && request.resource.data.title is string
+          && request.resource.data.title.size() >= 1
+          && request.resource.data.title.size() <= 200);
+      allow update: if isAdmin()
+        || (isTeacher()
+          && resource.data.teacher_id == request.auth.uid
+          && request.resource.data.teacher_id == resource.data.teacher_id
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            "title", "description", "video_url", "track", "level", "section", "is_published"
+          ])
+          && request.resource.data.track in ["ielts", "cefr"]
+          && request.resource.data.is_published is bool
+          && request.resource.data.title is string
+          && request.resource.data.title.size() >= 1
+          && request.resource.data.title.size() <= 200);
+      allow delete: if isAdmin()
+        || (isTeacher() && resource.data.teacher_id == request.auth.uid);
+    }
+
+    match /vocabulary/{wordId} {
+      allow read: if signedIn();
+      allow create: if isAdmin()
+        || (isTeacher()
+          && request.resource.data.created_by == request.auth.uid
+          && request.resource.data.track in ["ielts", "cefr"]
+          && request.resource.data.word is string
+          && request.resource.data.word.size() >= 1
+          && request.resource.data.word.size() <= 120
+          && request.resource.data.translation is string
+          && request.resource.data.translation.size() >= 1
+          && request.resource.data.translation.size() <= 500);
+      allow update, delete: if isAdmin()
+        || (isTeacher() && resource.data.created_by == request.auth.uid);
+    }
+
+    match /support_messages/{messageId} {
+      allow create: if signedIn()
+        && request.resource.data.user_id == request.auth.uid
+        && request.resource.data.status == "new"
+        && request.resource.data.keys().hasOnly([
+          "user_id", "name", "email", "topic", "message", "status", "created_at"
+        ])
+        && request.resource.data.keys().hasAll([
+          "user_id", "name", "email", "topic", "message", "status", "created_at"
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 320
+        && request.resource.data.topic in ["account", "learning", "technical", "other"]
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 10
+        && request.resource.data.message.size() <= 5000;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /practice_results/{resultId} {
+      allow create: if signedIn()
+        && request.resource.data.user_id == request.auth.uid
+        && request.resource.data.keys().hasOnly([
+          "user_id", "exam_key", "skill", "score", "total", "accuracy", "duration_seconds", "created_at"
+        ])
+        && request.resource.data.exam_key is string
+        && request.resource.data.skill in ["reading", "listening", "writing", "speaking", "cefr"]
+        && request.resource.data.score is int
+        && request.resource.data.total is int
+        && request.resource.data.total > 0
+        && request.resource.data.score >= 0
+        && request.resource.data.score <= request.resource.data.total
+        && request.resource.data.accuracy is int
+        && request.resource.data.accuracy >= 0
+        && request.resource.data.accuracy <= 100
+        && request.resource.data.accuracy == math.round(
+          request.resource.data.score * 100.0 / request.resource.data.total
+        )
+        && request.resource.data.exam_key.size() >= 1
+        && request.resource.data.exam_key.size() <= 120
+        && request.resource.data.duration_seconds is int
+        && request.resource.data.duration_seconds >= 0
+        && request.resource.data.duration_seconds <= 86400
+        && request.resource.data.created_at is string;
+      allow read: if signedIn() && resource.data.user_id == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    match /writing_submissions/{submissionId} {
+      allow create: if signedIn()
+        && request.resource.data.user_id == request.auth.uid
+        && request.resource.data.keys().hasOnly([
+          "user_id", "prompt_id", "prompt_title", "body", "word_count", "feedback", "created_at"
+        ])
+        && request.resource.data.prompt_id is string
+        && request.resource.data.prompt_title is string
+        && request.resource.data.body is string
+        && request.resource.data.body.size() >= 100
+        && request.resource.data.body.size() <= 20000
+        && request.resource.data.word_count is int
+        && request.resource.data.word_count >= 1
+        && request.resource.data.word_count <= 5000
+        && request.resource.data.word_count <= request.resource.data.body.size()
+        && request.resource.data.feedback is list
+        && request.resource.data.feedback.size() <= 10
+        && request.resource.data.created_at is string;
+      allow read: if signedIn() && resource.data.user_id == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    match /live_classes/{classId} {
+      allow read: if resource.data.is_published == true
+        || (isTeacher() && resource.data.teacher_id == request.auth.uid)
+        || isAdmin();
+      allow create: if isTeacher()
+        && request.resource.data.teacher_id == request.auth.uid
+        && request.resource.data.is_published == true
+        && request.resource.data.keys().hasOnly([
+          "teacher_id", "teacher_name", "title", "description", "start_at",
+          "meeting_url", "recording_url", "is_published", "created_at"
+        ])
+        && request.resource.data.teacher_name is string
+        && request.resource.data.title is string
+        && request.resource.data.title.size() >= 4
+        && request.resource.data.title.size() <= 120
+        && request.resource.data.description is string
+        && request.resource.data.description.size() <= 1000
+        && request.resource.data.start_at is string
+        && request.resource.data.start_at.size() <= 40
+        && request.resource.data.meeting_url is string
+        && request.resource.data.meeting_url.size() <= 2000
+        && request.resource.data.recording_url is string
+        && request.resource.data.recording_url.size() <= 2000
+        && request.resource.data.created_at is string;
+      allow update, delete: if isAdmin()
+        || (isTeacher()
+          && resource.data.teacher_id == request.auth.uid
+          && request.resource.data.teacher_id == resource.data.teacher_id
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            "title", "description", "start_at", "meeting_url", "recording_url", "is_published"
+          ])
+          && request.resource.data.title is string
+          && request.resource.data.title.size() >= 4
+          && request.resource.data.title.size() <= 120
+          && request.resource.data.description is string
+          && request.resource.data.description.size() <= 1000
+          && request.resource.data.start_at is string
+          && request.resource.data.start_at.size() <= 40
+          && request.resource.data.meeting_url is string
+          && request.resource.data.meeting_url.size() <= 2000
+          && request.resource.data.recording_url is string
+          && request.resource.data.recording_url.size() <= 2000
+          && request.resource.data.is_published is bool);
+    }
+  }
+}

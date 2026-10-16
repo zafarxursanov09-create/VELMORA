@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="VELMORA — IELTS va CEFR imtihonlariga puxta tayyorgarlik, o‘quv materiallari va shaxsiy o‘quv yo‘nalishi."
+    />
+    <meta name="theme-color" content="#f5f7fa" />
+    <meta name="velmora-app-origin" content="http://localhost:3000" />
+    <title>VELMORA | IELTS va CEFR platformasi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <nav class="container nav" aria-label="Asosiy navigatsiya">
+          <a class="logo" href="#top" aria-label="VELMORA bosh sahifa"><span class="logo-mark">V</span><span class="logo-text">VELMORA</span></a>
+          <button class="nav-toggle" type="button" aria-label="Menyuni ochish" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+          <div class="nav-links" id="navMenu">
+            <a href="#learning" data-i18n="nav.ielts">IELTS</a><a href="#cefr" data-i18n="nav.cefr">CEFR</a><a href="#features" data-i18n="nav.features">Imkoniyatlar</a><a href="#teachers" data-i18n="nav.teachers">Ustozlar</a><a data-i18n="nav.classes" data-app-path="/classes" href="http://localhost:3000/classes">Jonli darslar</a><a href="#faq" data-i18n="nav.help">24/7 yordam</a>
+            <div class="language-switch" role="group" aria-label="Tilni tanlang"><button type="button" data-locale="uz" aria-pressed="true">UZ</button><button type="button" data-locale="en" aria-pressed="false">EN</button></div>
+            <a class="login-link" data-i18n="nav.login" data-app-path="/login" href="http://localhost:3000/login">Kirish</a>
+            <a class="nav-cta" data-i18n="nav.start" data-app-path="/login?mode=register" href="http://localhost:3000/login?mode=register">Boshlash <span aria-hidden="true">↗</span></a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="container hero" id="top">
+          <div class="hero-copy">
+            <span class="eyebrow"><span class="eyebrow-dot"></span><span data-i18n="hero.eyebrow">IELTS + CEFR · O‘QUV PLATFORMASI</span></span>
+            <h1 data-i18n="hero.title">Ingliz tilidagi keyingi <span class="gradient-text">bosqichingiz</span> shu yerdan.</h1>
+            <p data-i18n="hero.description">IELTS va CEFR imtihonlariga tayyorgarlik uchun darslar, mini-practice va maqsadingizga mos o‘quv yo‘nalishi.</p>
+            <div class="hero-actions">
+              <a class="primary-btn" data-i18n="hero.start" data-app-path="/login?mode=register" href="http://localhost:3000/login?mode=register">Bepul boshlash <span aria-hidden="true">↗</span></a>
+              <a class="secondary-btn" data-i18n="hero.explore" href="#learning">Yo‘nalishlarni ko‘rish</a>
+            </div>
+            <div class="hero-proof"><span data-i18n="hero.proofLevels"><b>6</b> CEFR darajasi</span><span data-i18n="hero.proofSkills"><b>4</b> asosiy ko‘nikma</span><span data-i18n="hero.proofGoal"><b>1</b> aniq o‘quv maqsadi</span></div>
+          </div>
+
+          <div class="hero-visual" aria-label="O‘quv kabineti namunasi">
+            <span class="float-chip chip-one" aria-hidden="true">IELTS</span><span class="float-chip chip-two" aria-hidden="true">CEFR</span>
+            <div class="dashboard-preview">
+              <div class="preview-head"><div><span class="preview-kicker" data-i18n="preview.kicker">O‘QUV KABINETI · NAMUNA</span><h2 data-i18n="preview.title">Shaxsiy yo‘nalishingiz</h2></div><span class="preview-avatar" aria-hidden="true">V</span></div>
+              <div class="preview-target"><div><span data-i18n="preview.target">IELTS maqsadi</span><strong>6.5 <small>/ 9.0</small></strong></div><div class="preview-ring"><span>72%</span></div></div>
+              <div class="preview-level"><span data-i18n="preview.current">Hozirgi CEFR darajasi</span><strong>B2</strong><span class="level-next" data-i18n="preview.next">Keyingi: C1</span></div>
+              <div class="preview-skills">
+                <div class="preview-skill"><div><span>Reading</span><b>76%</b></div><span class="progress"><i style="--progress:76%"></i></span></div>
+                <div class="preview-skill"><div><span>Listening</span><b>64%</b></div><span class="progress"><i style="--progress:64%"></i></span></div>
+                <div class="preview-skill"><div><span>Writing</span><b>52%</b></div><span class="progress"><i style="--progress:52%"></i></span></div>
+                <div class="preview-skill"><div><span>Speaking</span><b>68%</b></div><span class="progress"><i style="--progress:68%"></i></span></div>
+              </div>
+              <div class="preview-foot"><span><i></i> <span data-i18n="preview.step">Har kuni kichik qadam</span></span><span>VELMORA</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="container trust-strip" aria-label="Imtihon haqida rasmiy ma’lumot">
+          <span class="trust-label" data-i18n="trust.label">IELTS bo‘yicha rasmiy manbalar</span>
+          <a href="https://ielts.idp.com/" target="_blank" rel="noreferrer"><b class="source-mark idp-mark">IDP</b><span>IDP IELTS <small data-i18n="trust.examInfo">Imtihon haqida</small></span><i aria-hidden="true">↗</i></a>
+          <a href="https://www.britishcouncil.uz/en/exam/ielts" target="_blank" rel="noreferrer"><b class="source-mark bc-mark">BC</b><span>British Council <small data-i18n="trust.ieltsInfo">IELTS ma’lumoti</small></span><i aria-hidden="true">↗</i></a>
+          <span class="trust-note" data-i18n="trust.note">Rasmiy imtihon tashkilotchilari bilan hamkorlik da’vosi emas.</span>
+        </section>
+
+        <section class="section container" id="learning">
+          <div class="section-heading section-heading-row"><div><span class="section-kicker" data-i18n="learning.kicker">Maqsadli tayyorgarlik</span><h2 data-i18n="learning.title">Har bir ko‘nikmaga alohida e’tibor.</h2></div><p data-i18n="learning.description">IELTS uchun darslar va practice, CEFR uchun darajaga mos ingliz tili materiali.</p></div>
+          <div class="learning-grid">
+            <a class="learning-card" data-app-path="/content/reading" href="http://localhost:3000/login?mode=register"><span class="card-icon icon-violet">↗</span><span class="card-label" data-i18n="cards.readingLabel">MATN TAHLILI</span><h3>Reading</h3><p data-i18n="cards.readingText">Matnni anglash, asosiy fikr va savol turlari ustida ishlang.</p><span class="card-link" data-i18n="cards.lessons">Darslarni ochish <b>↗</b></span></a>
+            <a class="learning-card" data-app-path="/content/listening" href="http://localhost:3000/login?mode=register"><span class="card-icon icon-teal">♫</span><span class="card-label" data-i18n="cards.listeningLabel">TINGLAB TUSHUNISH</span><h3>Listening</h3><p data-i18n="cards.listeningText">Audio materiallar orqali diqqat va tushunish ko‘nikmasini rivojlantiring.</p><span class="card-link" data-i18n="cards.lessons">Darslarni ochish <b>↗</b></span></a>
+            <a class="learning-card" data-app-path="/writing" href="http://localhost:3000/writing"><span class="card-icon icon-gold">✎</span><span class="card-label" data-i18n="cards.writingLabel">YOZMA NUTQ</span><h3>Writing</h3><p data-i18n="cards.writingText">Task 1 va Task 2 uchun essay yozing, checklist bilan tahrir qiling.</p><span class="card-link" data-i18n="cards.writingLink">Writing mashqini ochish <b>↗</b></span></a>
+            <a class="learning-card" data-app-path="/content/speaking" href="http://localhost:3000/login?mode=register"><span class="card-icon icon-coral">◉</span><span class="card-label" data-i18n="cards.speakingLabel">OG‘ZAKI NUTQ</span><h3>Speaking</h3><p data-i18n="cards.speakingText">Mavzular, foydali iboralar va ravon gapirish darslari.</p><span class="card-link" data-i18n="cards.lessons">Darslarni ochish <b>↗</b></span></a>
+            <a class="learning-card" data-app-path="/content/vocabulary" href="http://localhost:3000/login?mode=register"><span class="card-icon icon-teal">Aa</span><span class="card-label" data-i18n="cards.vocabLabel">SO‘Z BOYLIGI</span><h3>Vocabulary</h3><p data-i18n="cards.vocabText">Tarjima va misollar orqali maqsadli yangi so‘zlarni o‘rganing.</p><span class="card-link" data-i18n="cards.vocabLink">Lug‘atni ochish <b>↗</b></span></a>
+            <a class="learning-card" data-app-path="/content/grammar" href="http://localhost:3000/login?mode=register"><span class="card-icon icon-violet">⌘</span><span class="card-label" data-i18n="cards.grammarLabel">TIL ASOSLARI</span><h3>Grammar</h3><p data-i18n="cards.grammarText">Grammatika mavzularini bosqichma-bosqich mustahkamlang.</p><span class="card-link" data-i18n="cards.lessons">Darslarni ochish <b>↗</b></span></a>
+            <a class="learning-card learning-card-featured" data-app-path="/practice" href="http://localhost:3000/practice"><span class="card-icon icon-ink">◎</span><span class="card-label" data-i18n="cards.practiceLabel">VAQT BILAN MASHQ</span><h3 data-i18n="cards.practiceTitle">Reading practice</h3><p data-i18n="cards.practiceText">Vaqtli mini-test, savol navigatsiyasi va javoblar izohi.</p><span class="card-link" data-i18n="cards.practiceLink">Mini-testni boshlash <b>↗</b></span></a>
+            <a class="learning-card" data-app-path="/assessment" href="http://localhost:3000/assessment"><span class="card-icon icon-coral">✦</span><span class="card-label" data-i18n="cards.assessmentLabel">DARAJANI ANIQLASH</span><h3 data-i18n="cards.assessmentTitle">CEFR placement</h3><p data-i18n="cards.assessmentText">Qisqa diagnostika bilan taxminiy darajangizni bilib oling.</p><span class="card-link" data-i18n="cards.assessmentLink">Testni boshlash <b>↗</b></span></a>
+          </div>
+        </section>
+
+        <section class="cefr-band" id="cefr">
+          <div class="container cefr-layout">
+            <div class="cefr-copy"><span class="section-kicker" data-i18n="cefr.kicker">A1 DAN C2 GACHA</span><h2 data-i18n="cefr.title">Ingliz tili darajangizga mos yo‘l.</h2><p data-i18n="cefr.description">Har bir bosqichda lug‘at, grammatika, reading, listening, speaking va writing materiallari.</p><a class="text-link" data-i18n="cefr.link" data-app-path="/assessment" href="http://localhost:3000/assessment">Qisqa CEFR testini ishlash <span aria-hidden="true">→</span></a></div>
+            <div class="cefr-levels">
+              <article><span>A1</span><div><b data-i18n="cefr.a1">Beginner</b><p data-i18n="cefr.a1Text">Kundalik sodda iboralarni anglash.</p></div></article>
+              <article><span>A2</span><div><b data-i18n="cefr.a2">Elementary</b><p data-i18n="cefr.a2Text">Tanish mavzularda muloqot.</p></div></article>
+              <article><span>B1</span><div><b data-i18n="cefr.b1">Intermediate</b><p data-i18n="cefr.b1Text">Tanish vaziyatlarda mustaqil fikr.</p></div></article>
+              <article><span>B2</span><div><b data-i18n="cefr.b2">Upper intermediate</b><p data-i18n="cefr.b2Text">Murakkab matn va ravon muloqot.</p></div></article>
+              <article><span>C1</span><div><b data-i18n="cefr.c1">Advanced</b><p data-i18n="cefr.c1Text">Tilni moslashuvchan va aniq ishlatish.</p></div></article>
+              <article><span>C2</span><div><b data-i18n="cefr.c2">Proficient</b><p data-i18n="cefr.c2Text">Deyarli barcha mazmunni oson anglash.</p></div></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section container" id="features">
+          <div class="section-heading"><span class="section-kicker" data-i18n="features.kicker">VELMORA TAJRIBASI</span><h2 data-i18n="features.title">O‘rganish jarayoni tartibli bo‘lsin.</h2><p data-i18n="features.description">Yo‘nalishingiz, maqsad darajangiz va kunlik vaqtingiz asosida mos materiallarni toping.</p></div>
+          <div class="feature-grid">
+            <article><span>01</span><h3 data-i18n="features.goalTitle">Shaxsiy o‘quv maqsadi</h3><p data-i18n="features.goalText">IELTS bandi yoki CEFR darajasini belgilang.</p></article>
+            <article><span>02</span><h3 data-i18n="features.cabinetTitle">Bitta o‘quv kabineti</h3><p data-i18n="features.cabinetText">Darslar va vocabulary materiallarini yo‘nalish bo‘yicha ko‘ring.</p></article>
+            <article><span>03</span><h3 data-i18n="features.resultsTitle">Amaliy natijalar tarixi</h3><p data-i18n="features.resultsText">Mini-test natijalarini hisobda saqlash uchun tizimga kiring.</p></article>
+          </div>
+        </section>
+
+        <section class="section container instructor-section" id="teachers">
+          <div><span class="section-kicker" data-i18n="teachers.kicker">USTOZLAR VA JAMOA</span><h2 data-i18n="teachers.title">O‘rganishda yordam kerakmi?</h2><p data-i18n="teachers.description">Ustozlar, darslar yoki platforma bo‘yicha savolingiz bo‘lsa, yordam markaziga murojaat qiling.</p></div>
+          <a class="secondary-btn" data-i18n="teachers.link" data-app-path="/support" href="http://localhost:3000/support">Yordam markazi <span aria-hidden="true">↗</span></a>
+        </section>
+
+        <section class="section container faq-section" id="faq">
+          <div class="section-heading"><span class="section-kicker" data-i18n="faq.kicker">SAVOLLARGA JAVOB</span><h2 data-i18n="faq.title">Ko‘p so‘raladigan savollar.</h2></div>
+          <div class="faq-list">
+            <details><summary data-i18n="faq.q1">IELTS va CEFR materiallari bir xilmi?</summary><p data-i18n="faq.a1">Yo‘q. Ro‘yxatdan o‘tishda tanlagan yo‘nalishingizga qarab tegishli materiallar ko‘rsatiladi.</p></details>
+            <details><summary data-i18n="faq.q2">CEFR testi sertifikat beradimi?</summary><p data-i18n="faq.a2">Yo‘q. Bu qisqa diagnostika bo‘lib, rasmiy imtihon yoki sertifikat o‘rnini bosmaydi.</p></details>
+            <details><summary data-i18n="faq.q3">Writing feedback AI tomonidan beriladimi?</summary><p data-i18n="faq.a3">Hozircha sahifa hajm, paragraflar va takrorlar bo‘yicha avtomatik checklist beradi; rasmiy band yoki AI bahosi bermaydi.</p></details>
+            <details><summary data-i18n="faq.q4">Test natijalarim saqlanadimi?</summary><p data-i18n="faq.a4">Tizimga kirganingizda mini-test natijalari profilingizga saqlanadi. Buning uchun Firebase qoidalari loyihaga nashr qilingan bo‘lishi kerak.</p></details>
+          </div>
+        </section>
+
+        <section class="container final-cta" id="start"><div><span class="section-kicker" data-i18n="cta.kicker">BIRINCHI QADAM BUGUN</span><h2 data-i18n="cta.title">Maqsadingiz sari boshlang.</h2><p data-i18n="cta.description">Hisob yarating, yo‘nalishingizni belgilang va mos darslardan boshlang.</p></div><a class="primary-btn" data-i18n="cta.button" data-app-path="/login?mode=register" href="http://localhost:3000/login?mode=register">Bepul hisob yaratish <span aria-hidden="true">↗</span></a></section>
+      </main>
+
+      <footer class="site-footer"><div class="container footer-main"><a class="logo" href="#top"><span class="logo-mark">V</span><span class="logo-text">VELMORA</span></a><p data-i18n="footer.tagline">IELTS va CEFR maqsadingiz sari aniq qadamlar.</p><div class="footer-links"><a href="#learning">IELTS</a><a href="#cefr">CEFR</a><a href="#teachers" data-i18n="footer.help">Yordam</a><a data-i18n="footer.register" data-app-path="/login?mode=register" href="http://localhost:3000/login?mode=register">Hisob yaratish</a></div></div><div class="container footer-bottom"><span>© <span id="year"></span> VELMORA</span><span data-i18n="footer.platform">IELTS va CEFR ta’lim platformasi</span></div></footer>
+      <div class="static-assistant-root">
+        <section class="static-assistant-panel" id="staticAssistantPanel" aria-label="VELMORA 24/7 yordamchi" hidden>
+          <header><div><span class="assistant-status-dot"></span><div><strong data-i18n="assistant.title">VELMORA yordamchi</strong><small data-i18n="assistant.status">24/7 · hozir faol</small></div></div><button type="button" id="assistantClose" aria-label="Yordamchini yopish">×</button></header>
+          <div class="static-assistant-messages" id="assistantMessages" aria-live="polite">
+            <article class="static-assistant-message assistant"><p data-i18n="assistant.welcome">Salom! IELTS, CEFR yoki platforma haqida savolingiz bormi?</p></article>
+            <div class="static-assistant-prompts"><button type="button" data-assistant-prompt data-i18n="assistant.quick1">CEFR testi haqida</button><button type="button" data-assistant-prompt data-i18n="assistant.quick2">Parolni tiklash</button><button type="button" data-assistant-prompt data-i18n="assistant.quick3">Jonli darslar</button></div>
+          </div>
+          <form class="static-assistant-form" id="assistantForm"><label class="sr-only" for="assistantInput">Xabaringiz</label><textarea id="assistantInput" rows="2" maxlength="1500" required data-i18n-placeholder="assistant.placeholder" placeholder="Savolingizni yozing..."></textarea><button type="submit" aria-label="Xabarni yuborish">↑</button></form>
+          <footer><span data-i18n="assistant.safe">Parol yoki to‘lov ma’lumotlarini yubormang.</span><a data-app-path="/support" href="http://localhost:3000/support" data-i18n="assistant.human">Yordam markazi ↗</a></footer>
+        </section>
+        <button class="support-fab" type="button" id="assistantToggle" aria-expanded="false" aria-controls="staticAssistantPanel" aria-label="24/7 yordam chatini ochish"><span aria-hidden="true">✳</span><span data-i18n="support.label">24/7 yordam</span></button>
+      </div>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>

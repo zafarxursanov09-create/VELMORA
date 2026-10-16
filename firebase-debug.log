@@ -1,0 +1,54 @@
+[debug] [2026-10-16T11:46:19.705Z] ----------------------------------------------------------------------
+[debug] [2026-10-16T11:46:19.711Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2026-10-16T11:46:19.712Z] CLI Version:   15.34.0
+[debug] [2026-10-16T11:46:19.712Z] Platform:      win32
+[debug] [2026-10-16T11:46:19.712Z] Node Version:  v24.18.0
+[debug] [2026-10-16T11:46:19.713Z] Detected Agent: unknown
+[debug] [2026-10-16T11:46:19.713Z] Time:          Fri Oct 16 2026 16:46:19 GMT+0500 (Uzbekistan Standard Time)
+[debug] [2026-10-16T11:46:19.713Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-10-16T11:46:23.490Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-10-16T11:46:23.491Z] > authorizing via signed-in user (zafarxursanov09@gmail.com)
+[debug] [2026-10-16T11:46:23.492Z] [iam] checking project it-academy-187e5 for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-10-16T11:46:23.525Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:23.525Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:23.528Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/it-academy-187e5:testIamPermissions [none]
+[debug] [2026-10-16T11:46:23.528Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/it-academy-187e5:testIamPermissions  x-goog-user-project=it-academy-187e5
+[debug] [2026-10-16T11:46:23.529Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/it-academy-187e5:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-10-16T11:46:25.088Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/it-academy-187e5:testIamPermissions 200
+[debug] [2026-10-16T11:46:25.088Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/it-academy-187e5:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-10-16T11:46:25.090Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:25.090Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:25.090Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/it-academy-187e5 [none]
+[debug] [2026-10-16T11:46:26.584Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/it-academy-187e5 200
+[debug] [2026-10-16T11:46:26.584Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/it-academy-187e5 {"projectId":"it-academy-187e5","projectNumber":"652042351555","displayName":"IT Academy","name":"projects/it-academy-187e5","resources":{"hostingSite":"it-academy-187e5"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_4f7bb470-101e-4e02-9448-2b8461e9b315"}
+[debug] [2026-10-16T11:46:30.630Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:30.630Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:30.632Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/it-academy-187e5/sites pageToken=&pageSize=10
+[debug] [2026-10-16T11:46:32.933Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/it-academy-187e5/sites 200
+[debug] [2026-10-16T11:46:32.933Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/it-academy-187e5/sites {"sites":[{"name":"projects/it-academy-187e5/sites/it-academy-187e5","defaultUrl":"https://it-academy-187e5.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2026-10-16T11:46:32.934Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:32.935Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:32.935Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/it-academy-187e5/sites 
+[debug] [2026-10-16T11:46:34.562Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/it-academy-187e5/sites 200
+[debug] [2026-10-16T11:46:34.562Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/it-academy-187e5/sites {"sites":[{"name":"projects/it-academy-187e5/sites/it-academy-187e5","defaultUrl":"https://it-academy-187e5.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2026-10-16T11:46:34.563Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:34.563Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:34.563Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/it-academy-187e5/webApps/-/config [none]
+[debug] [2026-10-16T11:46:36.021Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/it-academy-187e5/webApps/-/config 200
+[debug] [2026-10-16T11:46:36.021Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/it-academy-187e5/webApps/-/config {"projectId":"it-academy-187e5","storageBucket":"it-academy-187e5.firebasestorage.app","apiKey":"AIzaSyC-17TYVN7T2qplSOu_xYFc5r4G77Bv_Ig","authDomain":"it-academy-187e5.firebaseapp.com","messagingSenderId":"652042351555","projectNumber":"652042351555","version":"2"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2026-10-16T11:46:45.579Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:45.579Z] Checked if tokens are valid: true, expires at: 1792154485411
+[debug] [2026-10-16T11:46:45.580Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/it-academy-187e5/sites/it-academy-187e5 [none]
+[debug] [2026-10-16T11:46:47.903Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/it-academy-187e5/sites/it-academy-187e5 200
+[debug] [2026-10-16T11:46:47.903Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/it-academy-187e5/sites/it-academy-187e5 {"name":"projects/it-academy-187e5/sites/it-academy-187e5","defaultUrl":"https://it-academy-187e5.web.app","type":"DEFAULT_SITE"}
